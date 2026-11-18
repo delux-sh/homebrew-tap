@@ -35,9 +35,6 @@ jobs:
             arch: x86_64
             target: x86_64-unknown-linux-musl
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
       - name: Require the native runner architecture
         env:
           EXPECTED_SYSTEM: ${{ matrix.system }}
@@ -50,11 +47,9 @@ jobs:
           stable: true
           core: false
           cask: false
+      # setup-homebrew registers this tap at the event's commit.
       - name: Install the reviewed formula from published archives
-        run: |
-          brew tap-new --no-git delux-sh/tap
-          cp Formula/delux.rb "$(brew --repository delux-sh/tap)/Formula/delux.rb"
-          brew install delux-sh/tap/delux
+        run: brew install delux-sh/tap/delux
       - name: Test and audit the installed formula
         run: |
           brew test delux-sh/tap/delux
