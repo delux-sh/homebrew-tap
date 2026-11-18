@@ -1,0 +1,56 @@
+name: Formula
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  formula:
+    name: Formula (${{ matrix.target }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15
+            system: Darwin
+            arch: arm64
+            target: aarch64-apple-darwin
+          - runner: macos-15-intel
+            system: Darwin
+            arch: x86_64
+            target: x86_64-apple-darwin
+          - runner: ubuntu-24.04-arm
+            system: Linux
+            arch: aarch64
+            target: aarch64-unknown-linux-musl
+          - runner: ubuntu-24.04
+            system: Linux
+            arch: x86_64
+            target: x86_64-unknown-linux-musl
+    steps:
+      - name: Require the native runner architecture
+        env:
+          EXPECTED_SYSTEM: ${{ matrix.system }}
+          EXPECTED_ARCH: ${{ matrix.arch }}
+        run: |
+          test "$(uname -s)" = "$EXPECTED_SYSTEM"
+          test "$(uname -m)" = "$EXPECTED_ARCH"
+      - uses: Homebrew/actions/setup-homebrew@ceec4e8419bb3c97ce96e9dda7738499ed5f869d
+        with:
+          stable: true
+          core: false
+          cask: false
+      # setup-homebrew registers this tap at the event's commit.
+      - name: Install the reviewed formula from published archives
+        run: brew install delux-sh/tap/delux
+      - name: Test and audit the installed formula
+        run: |
+          brew test delux-sh/tap/delux
+          brew audit --strict delux-sh/tap/delux

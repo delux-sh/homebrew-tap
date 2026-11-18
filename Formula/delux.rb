@@ -6,12 +6,12 @@ class Delux < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/delux-sh/delux/releases/download/v0.1.0/delux-0.1.0-aarch64-apple-darwin.tar.gz"
-      sha256 "53768602d797ce15414ef4fa1764c63c4b9eae4745f4a1c8ea745447d1970a6f"
+      url "https://github.com/delux-sh/delux/releases/download/v0.2.0/delux-0.2.0-aarch64-apple-darwin.tar.gz"
+      sha256 "5991a513dbf7798b3f9fd2487ab27d2358d1543879c2255904a205b5c25cae4f"
     end
     on_intel do
-      url "https://github.com/delux-sh/delux/releases/download/v0.1.0/delux-0.1.0-x86_64-apple-darwin.tar.gz"
-      sha256 "8f1d9b5b5e053147b86be8cab5f4cfc04a9402bbef0c5ade264ca67e21e40da5"
+      url "https://github.com/delux-sh/delux/releases/download/v0.2.0/delux-0.2.0-x86_64-apple-darwin.tar.gz"
+      sha256 "7b45dc13bb8e6064eeab1c4be5842e361dd575a490120a0b93e2c136c4fd4c38"
     end
   end
 
@@ -19,12 +19,12 @@ class Delux < Formula
     depends_on "openssh"
 
     on_arm do
-      url "https://github.com/delux-sh/delux/releases/download/v0.1.0/delux-0.1.0-aarch64-unknown-linux-musl.tar.gz"
-      sha256 "6279bd12b3e660a7567912e89be67e68c2272bf8f64fc3dd4fd019b41fe128c0"
+      url "https://github.com/delux-sh/delux/releases/download/v0.2.0/delux-0.2.0-aarch64-unknown-linux-musl.tar.gz"
+      sha256 "00e4728df4fea513a22fe82cde07b46719dce14b1a5e43c5776cda7603f86294"
     end
     on_intel do
-      url "https://github.com/delux-sh/delux/releases/download/v0.1.0/delux-0.1.0-x86_64-unknown-linux-musl.tar.gz"
-      sha256 "92f5a57689c10f47e0133bb87f3fbc59328f7755421103c3808210acc88bc1ac"
+      url "https://github.com/delux-sh/delux/releases/download/v0.2.0/delux-0.2.0-x86_64-unknown-linux-musl.tar.gz"
+      sha256 "7937fec497e039c091ff724c4be3e583e5fbd2495202a22695cc132998f68d78"
     end
   end
 
